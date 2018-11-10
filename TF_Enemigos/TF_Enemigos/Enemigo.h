@@ -15,6 +15,7 @@ protected:
 	bool vivo;
 	int dir;
 	int tag;
+	int nrow, ncol;
 public:
 	Enemigo();
 	Enemigo(int width, int height);

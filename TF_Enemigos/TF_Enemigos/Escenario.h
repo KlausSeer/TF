@@ -1,5 +1,5 @@
 #include "Portal.h"
-#include "Horda.h"
+#include "Horde.h"
 #include <vector>
 #include <ctime>
 
@@ -9,7 +9,7 @@
 class Escenario
 {
 	std::vector<Portal*> portales;
-	Horda* laHorda;
+	Horde* laHorda;
 	int n_fondo;
 	int nivel; 
 	/*
@@ -19,9 +19,8 @@ class Escenario
 	*/
 public:
 	Escenario(int _nportales, int nivel); // probablemente el nivel del escenario sera la profundidad en la que esta su nodo en el arbol
-	~Escenario();
 
-	void Mostrar(Graphics^G, Bitmap^ bg1,Bitmap^bmpM, Bitmap^bmpS, Bitmap^bmpB); // Se deben dibujar el escenario, los portales, los enemigos(Horda)
+	void Mostrar(Graphics^G, Bitmap^ bg1,Bitmap^bmpM, Bitmap^bmpS, Bitmap^bmpB, Bitmap^bmpT); // Se deben dibujar el escenario, los portales, los enemigos(Horda)
 	int ver_Contact_con_Portales(Rectangle UbicacionJugador); // esta funcion para saber si se ha cruzado un portal (-1: No cruzo, 1: Hacia el nodo padre, 2: nodo hijo izq, 3: nodo hijo der)
 
 private:

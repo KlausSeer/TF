@@ -16,6 +16,7 @@ public:
 		shootCooldown = 0;
 		shootDelay = rand() % 3 + 5;
 		tag = 1;
+		nrow = ncol = 4;
 	}
 	~Shooter();
 	void Mostrar(Graphics^ G, Bitmap^ bmp);

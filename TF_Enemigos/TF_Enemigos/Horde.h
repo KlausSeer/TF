@@ -1,6 +1,7 @@
 #pragma once
 #include "Melee.h"
 #include "Shooter.h"
+#include "TPEnemy.h"
 #include <vector>
 
 class Horde
@@ -10,7 +11,7 @@ public:
 	Horde(int n, int width, int height);
 	Horde(int nM, int nS, int width, int height);
 	void Initialize(int n, int width, int height);
-	void Mostrar(Graphics^G, Bitmap^bmpM, Bitmap^bmpS, Bitmap^bmpB);
+	void Mostrar(Graphics^G, Bitmap^bmpM, Bitmap^bmpS, Bitmap^bmpB, Bitmap^bmpT);
 	void CheckLive();
 	~Horde();
 };

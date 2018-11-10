@@ -9,32 +9,32 @@ Escenario::Escenario(int nportales, int _nivel){
 	this->nivel = _nivel;
 
 	int n = 4*nivel - 1; // para determinar el numero de enemigos
-	this->laHorda = new Horda(n, 15,15); // n es numerodeenemigos, width ,heigt 
+	this->laHorda = new Horde(n, 15,15); // n es numerodeenemigos, width ,heigt 
 
 }
 
 void Escenario::inicializarPortales(int n) {
 	
 	if (n == 3) {
-		portales.push_back(new Portal((Form_Width/2)-7,0)) //Portal superior central (para regresar al escenario anterior); 
+		portales.push_back(new Portal((Form_Width / 2) - 7, 0)); //Portal superior central (para regresar al escenario anterior); 
 	}
 
-	this->portales.push_back(new Portal((Form_Width / 10), (Form_Height - 25)); // Portal inferior izq
-	this->portales.push_back(new Portal((Form_Width / 1.2), (Form_Height - 25)); // Portal inferior der
+	this->portales.push_back(new Portal((Form_Width / 10), (Form_Height - 25))); // Portal inferior izq
+	this->portales.push_back(new Portal((Form_Width / 1.2), (Form_Height - 25))); // Portal inferior der
 	
 }
 
-void Escenario::Mostrar(Graphics^G, Bitmap^ bg1,Bitmap^bmpM, Bitmap^bmpS, Bitmap^bmpB){
+void Escenario::Mostrar(Graphics^G, Bitmap^ bg1,Bitmap^bmpM, Bitmap^bmpS, Bitmap^bmpB, Bitmap^bmpT){
 
-	switch this->n_fondo {
+	switch (n_fondo) {
 		case 0 : G->DrawImage(bg1, Rectangle(0,0,Form_Width,Form_Height)); break;
-		case default: break;
+		default: break;
 	} //Dibuja Fondo
 
-	Horda->Mostrar(G, bmpM, bmpS,Bitmap^bmpB); // Dibuja Horda
+	laHorda->Mostrar(G, bmpM, bmpS,bmpB, bmpT); // Dibuja Horda
 
 	for each (Portal* var in portales){
-		var->Mostrar();
+		var->Mostrar(G, bmpB);
 	} //Dibuja los portales
 
 }

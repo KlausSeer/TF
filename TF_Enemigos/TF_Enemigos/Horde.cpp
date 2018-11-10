@@ -7,11 +7,13 @@ Horde::Horde(int n, int width, int height)
 
 Horde::Horde(int nM, int nS, int width, int height)
 {
-	Enemies.reserve(nM + nS);
+	Enemies.reserve(nM + nS + 1);
 	Enemigo* nuevo;
+	nuevo = new TPEnemy(width, height);
+	Enemies.emplace_back(nuevo);
 	for (int i = 0; i < nM; i++)
 	{
-			nuevo = new Melee(width, height);
+		nuevo = new Melee(width, height);
 		Enemies.emplace_back(nuevo);
 	}
 
@@ -24,8 +26,10 @@ Horde::Horde(int nM, int nS, int width, int height)
 
 void Horde::Initialize(int n, int width, int height)
 {
-	Enemies.reserve(n);
+	Enemies.reserve(n + 1);
 	Enemigo* nuevo;
+	nuevo = new TPEnemy(width, height);
+	Enemies.emplace_back(nuevo);
 	for (int i = 0; i < n; i++)
 	{
 		if (rand()% 2 == 0)
@@ -36,7 +40,7 @@ void Horde::Initialize(int n, int width, int height)
 	}
 }
 
-void Horde::Mostrar(Graphics ^ G, Bitmap^bmpM, Bitmap^bmpS, Bitmap^bmpB)
+void Horde::Mostrar(Graphics ^ G, Bitmap^bmpM, Bitmap^bmpS, Bitmap^bmpB, Bitmap^bmpT)
 {
 	for each (Enemigo* var in Enemies)
 	{
@@ -45,6 +49,9 @@ void Horde::Mostrar(Graphics ^ G, Bitmap^bmpM, Bitmap^bmpS, Bitmap^bmpB)
 
 		else if(var->getTag() == 1)
 			var->Mostrar(G, bmpS, bmpB);
+
+		else if (var->getTag() == 2)
+			var->Mostrar(G, bmpT);
 	}
 }
 

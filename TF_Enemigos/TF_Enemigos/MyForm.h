@@ -1,5 +1,6 @@
 #pragma once
 #include "Horde.h"
+#include "VecItems.h"
 #include <time.h>
 
 namespace TF_Enemigos {
@@ -30,8 +31,12 @@ namespace TF_Enemigos {
 			ShootBitmap = gcnew Bitmap("ShootSprite.png");
 			BulletBitmap = gcnew Bitmap("BulletSprite.png");
 			background = gcnew Bitmap("background.jpg");
-			horde = new Horde(3, 4, G->VisibleClipBounds.Width, G->VisibleClipBounds.Height);
-
+			AmmoBitmap = gcnew Bitmap("AmmoSprite.png");
+			LifeBitmap = gcnew Bitmap("LifeSprite.png");
+			PointsBitmap = gcnew Bitmap("PointsSprite.png");
+			TPBitmap = gcnew Bitmap("TPSprite.png");
+			horde = new Horde(3,2, G->VisibleClipBounds.Width, G->VisibleClipBounds.Height);
+			Items = new VecItems(3, 3, 1, G->VisibleClipBounds.Width, G->VisibleClipBounds.Height);
 		}
 
 	protected:
@@ -58,7 +63,12 @@ namespace TF_Enemigos {
 		Bitmap^ ShootBitmap;
 		Bitmap^ background;
 		Bitmap^ BulletBitmap;
+		Bitmap^ AmmoBitmap;
+		Bitmap^ LifeBitmap;
+		Bitmap^ PointsBitmap;
+		Bitmap^ TPBitmap;
 		Horde* horde;
+		VecItems* Items;
 	private: System::Windows::Forms::Timer^  deltaTime;
 			 BufferedGraphicsContext^ espaceBuffer;
 
@@ -94,7 +104,8 @@ namespace TF_Enemigos {
 		horde->CheckLive();
 		BG->Graphics->Clear(Color::Black);
 		BG->Graphics->DrawImage(background, 0.0f, 0.0f, G->VisibleClipBounds.Width, G->VisibleClipBounds.Height);
-		horde->Mostrar(BG->Graphics, MeleBitmap, ShootBitmap, BulletBitmap);
+		horde->Mostrar(BG->Graphics, MeleBitmap, ShootBitmap, BulletBitmap, TPBitmap);
+		Items->Mostrar(BG->Graphics, AmmoBitmap, PointsBitmap, LifeBitmap);
 		BG->Render(G);
 	}
 	};

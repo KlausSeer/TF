@@ -13,7 +13,7 @@ class Portal { // los portales no se mueven(posicion fija)
 public:
 	Portal(int _x, int _y);
 	void Mostrar(Graphics^ G, Bitmap^ bmp); // bmp debe ser un sprite
-	bool Contact_Player(Rectangle* jugador_AreaDibujo); //El jugador toca el portal
+	bool Contact_Player(Rectangle jugador_AreaDibujo); //El jugador toca el portal
 
 };
 

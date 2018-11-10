@@ -14,10 +14,10 @@ Shooter::~Shooter()
 void Shooter::Mostrar(Graphics ^ G, Bitmap ^ bmp)
 {
 	Mover(G);
-	Rectangle cut(col * bmp->Width / 4, dir* bmp->Height / 4, bmp->Width / 4, bmp->Height / 4);
+	Rectangle cut(col * bmp->Width / ncol, dir* bmp->Height / nrow, bmp->Width / ncol, bmp->Height / nrow);
 	G->DrawImage(bmp, x, y, cut, GraphicsUnit::Pixel);
 	col++;
-	col %= 4;
+	col %= ncol;
 
 }
 

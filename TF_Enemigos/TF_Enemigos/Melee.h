@@ -8,6 +8,7 @@ public:
 	Melee(int width, int height) : Enemigo(width, height)
 	{
 		tag = 0;
+		nrow = ncol = 4;
 	}
 	~Melee();
 	void Mostrar(Graphics^ G, Bitmap^ bmp, Bitmap^bmpS);
