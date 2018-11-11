@@ -1,54 +1,42 @@
 #include "Escenario.h"
 
 Escenario::Escenario(int nportales, int _nivel){
-	inicializarPortales(nportales);
-
-	srand(time(0));
-	this->n_fondo = rand () % 1;
-
+	
 	this->nivel = _nivel;
 
-	int n = 4*nivel - 1; // para determinar el numero de enemigos
-	this->laHorda = new Horde(n, 15,15); // n es numerodeenemigos, width ,heigt 
+	srand(time(0));
+	this->n_fondo = rand() % 1;
 
-}
-
-void Escenario::inicializarPortales(int n) {
+	int n = 4 * nivel - 1; // para determinar el numero de enemigos
+	this->laHorda = new Horde(n, 15, 15); // n es numerodeenemigos, width ,heigt 
 	
-	if (n == 3) {
-		portales.push_back(new Portal((Form_Width / 2) - 7, 0)); //Portal superior central (para regresar al escenario anterior); 
-	}
+	this->portales = new VectPortales(nportales);
 
-	this->portales.push_back(new Portal((Form_Width / 10), (Form_Height - 25))); // Portal inferior izq
-	this->portales.push_back(new Portal((Form_Width / 1.2), (Form_Height - 25))); // Portal inferior der
+	this->items = new VecItems(n % 7, Form_Width, Form_Height);  //TIENE DOS CONSTRUCTORES ?
 	
 }
 
-void Escenario::Mostrar(Graphics^G, Bitmap^ bg1,Bitmap^bmpM, Bitmap^bmpS, Bitmap^bmpB, Bitmap^bmpT){
 
+
+void Escenario::Mostrar(Graphics^G, Bitmap^ bg1,Bitmap^bmpM, Bitmap^bmpS, Bitmap^bmpB, Bitmap^bmpT, Bitmap^ bmpPor, Bitmap^ bmpA, Bitmap^ bmpP, Bitmap^ bmpV){
+	//Dibuja Fondo
 	switch (n_fondo) {
 		case 0 : G->DrawImage(bg1, Rectangle(0,0,Form_Width,Form_Height)); break;
 		default: break;
-	} //Dibuja Fondo
+	}
+	// Dibuja Horda
+	laHorda->Mostrar(G, bmpM, bmpS,bmpB, bmpT); 
 
-	laHorda->Mostrar(G, bmpM, bmpS,bmpB, bmpT); // Dibuja Horda
+	//Dibuja los portales
+	this->portales->Mostrar(G, bmpPor);
 
-	for each (Portal* var in portales){
-		var->Mostrar(G, bmpB);
-	} //Dibuja los portales
+	//Dibujar portales
+	this->items->Mostrar(G, bmpA, bmpP, bmpV);
 
 }
 
 int Escenario::ver_Contact_con_Portales(Rectangle UbicacionJugador){
 
-	int i = 0;
-	for each(Portal* var in portales){
-		i+=1;
-		if(var->Contact_Player(UbicacionJugador)){
-			return i;
-		}
+	return this->portales->ver_Contact_con_Portales(UbicacionJugador);
 
-	}
-
-	return -1;
 }
