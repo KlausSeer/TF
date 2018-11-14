@@ -9,7 +9,7 @@ class Arbol_Escenario {
 		Node* Father_Esc;
 		Node* left_Child_Esc;
 		Node* right_Child_Esc;
-
+		int profundidad;
 		Node(Escenario* element, Node* padre, Node* left, Node* right);
 	};
 
@@ -23,8 +23,8 @@ public:
 
 	Node* return_Current_Tree();
 
-	void manage_Tree(Rectangle UbicacionJugador);
+	void manage_Tree(Rectangle UbicacionJugador); // Si toca el portal cambio de escenario
 
-
+	void tree_Random_node(int a, int b, int c); // parametros de teletransportación
 
 };
