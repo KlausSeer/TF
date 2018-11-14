@@ -25,6 +25,6 @@ public:
 
 	void manage_Tree(Rectangle UbicacionJugador);
 
-
+	void tree_Random_node(int a, int b, int c);
 
 };
