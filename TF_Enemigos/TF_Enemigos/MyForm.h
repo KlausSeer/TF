@@ -1,6 +1,5 @@
 #pragma once
-#include "Horde.h"
-#include "VecItems.h"
+#include "Juego.h"
 #include <time.h>
 
 namespace TF_Enemigos {
@@ -24,7 +23,7 @@ namespace TF_Enemigos {
 			//
 			//TODO: agregar código de constructor aquí
 			//
-			G = CreateGraphics();
+			G = this->CreateGraphics();
 			espaceBuffer = BufferedGraphicsManager::Current;
 			BG = espaceBuffer->Allocate(G, ClientRectangle);
 			MeleBitmap = gcnew Bitmap("MeleSprite.png");
@@ -35,8 +34,9 @@ namespace TF_Enemigos {
 			LifeBitmap = gcnew Bitmap("LifeSprite.png");
 			PointsBitmap = gcnew Bitmap("PointsSprite.png");
 			TPBitmap = gcnew Bitmap("TPSprite.png");
-			horde = new Horde(3,2, G->VisibleClipBounds.Width, G->VisibleClipBounds.Height);
-			Items = new VecItems(3, 3, 1, G->VisibleClipBounds.Width, G->VisibleClipBounds.Height);
+			PlayerBitmap = gcnew Bitmap("PlayerSprite.png");
+			ProyectilBitmap = gcnew Bitmap("ProyectilSprite.png");;
+			GameManager = new Juego();
 		}
 
 	protected:
@@ -67,46 +67,60 @@ namespace TF_Enemigos {
 		Bitmap^ LifeBitmap;
 		Bitmap^ PointsBitmap;
 		Bitmap^ TPBitmap;
-		Horde* horde;
-		VecItems* Items;
+		Bitmap^ PlayerBitmap;
+		Bitmap^ ProyectilBitmap;
+		Juego* GameManager;
 	private: System::Windows::Forms::Timer^  deltaTime;
+	private: System::Windows::Forms::Timer^  PhysicsTime;
 			 BufferedGraphicsContext^ espaceBuffer;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Método necesario para admitir el Diseñador. No se puede modificar
-		/// el contenido de este método con el editor de código.
-		/// </summary>
-		void InitializeComponent(void)
-		{
-			this->components = (gcnew System::ComponentModel::Container());
-			this->deltaTime = (gcnew System::Windows::Forms::Timer(this->components));
-			this->SuspendLayout();
-			// 
-			// deltaTime
-			// 
-			this->deltaTime->Enabled = true;
-			this->deltaTime->Tick += gcnew System::EventHandler(this, &MyForm::deltaTime_Tick);
-			// 
-			// MyForm
-			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(284, 262);
-			this->Name = L"MyForm";
-			this->Text = L"MyForm";
-			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
-			this->ResumeLayout(false);
+			 /// <summary>
+			 /// Método necesario para admitir el Diseñador. No se puede modificar
+			 /// el contenido de este método con el editor de código.
+			 /// </summary>
+			 void InitializeComponent(void)
+			 {
+				 this->components = (gcnew System::ComponentModel::Container());
+				 this->deltaTime = (gcnew System::Windows::Forms::Timer(this->components));
+				 this->PhysicsTime = (gcnew System::Windows::Forms::Timer(this->components));
+				 this->SuspendLayout();
+				 // 
+				 // deltaTime
+				 // 
+				 this->deltaTime->Enabled = true;
+				 this->deltaTime->Tick += gcnew System::EventHandler(this, &MyForm::deltaTime_Tick);
+				 // 
+				 // PhysicsTime
+				 // 
+				 this->PhysicsTime->Enabled = true;
+				 this->PhysicsTime->Tick += gcnew System::EventHandler(this, &MyForm::PhysicsTime_Tick);
+				 // 
+				 // MyForm
+				 // 
+				 this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+				 this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+				 this->ClientSize = System::Drawing::Size(284, 262);
+				 this->Name = L"MyForm";
+				 this->Text = L"MyForm";
+				 this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
+				 this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MyForm::MyForm_KeyDown);
+				 this->ResumeLayout(false);
 
-		}
+			 }
 #pragma endregion
 	private: System::Void deltaTime_Tick(System::Object^  sender, System::EventArgs^  e) {
-		horde->CheckLive();
+		//horde->CheckLive();
 		BG->Graphics->Clear(Color::Black);
-		BG->Graphics->DrawImage(background, 0.0f, 0.0f, G->VisibleClipBounds.Width, G->VisibleClipBounds.Height);
-		horde->Mostrar(BG->Graphics, MeleBitmap, ShootBitmap, BulletBitmap, TPBitmap);
-		Items->Mostrar(BG->Graphics, AmmoBitmap, PointsBitmap, LifeBitmap);
+		//BG->Graphics->DrawImage(background, 0.0f, 0.0f, G->VisibleClipBounds.Width, G->VisibleClipBounds.Height);
+		GameManager->Mostrar(BG->Graphics, background, MeleBitmap, ShootBitmap, BulletBitmap, TPBitmap, TPBitmap, AmmoBitmap, PointsBitmap, LifeBitmap, PlayerBitmap, ProyectilBitmap);
 		BG->Render(G);
 	}
-	};
+	private: System::Void MyForm_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e) {
+		GameManager->Mover(BG->Graphics, PlayerBitmap, e->KeyCode);
+	}
+	private: System::Void PhysicsTime_Tick(System::Object^  sender, System::EventArgs^  e) {
+		GameManager->CheckColisions();
+	}
+};
 }

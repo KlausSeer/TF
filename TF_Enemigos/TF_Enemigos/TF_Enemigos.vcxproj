@@ -129,10 +129,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Arbol_Escenario.h" />
     <ClInclude Include="Bala.h" />
     <ClInclude Include="Enemigo.h" />
     <ClInclude Include="Escenario.h" />
     <ClInclude Include="Horde.h" />
+    <ClInclude Include="Juego.h" />
     <ClInclude Include="Melee.h" />
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
@@ -141,26 +143,32 @@
     <ClInclude Include="ObjetoAmmo.h" />
     <ClInclude Include="ObjetoPunt.h" />
     <ClInclude Include="ObjetoVida.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Portal.h" />
     <ClInclude Include="Shooter.h" />
     <ClInclude Include="TPEnemy.h" />
     <ClInclude Include="VecItems.h" />
+    <ClInclude Include="VectPortales.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Arbol_Escenario.cpp" />
     <ClCompile Include="Bala.cpp" />
     <ClCompile Include="Enemigo.cpp" />
     <ClCompile Include="Escenario.cpp" />
     <ClCompile Include="Horde.cpp" />
+    <ClCompile Include="Juego.cpp" />
     <ClCompile Include="Melee.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="Objeto.cpp" />
     <ClCompile Include="ObjetoAmmo.cpp" />
     <ClCompile Include="ObjetoPunt.cpp" />
     <ClCompile Include="ObjetoVida.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Shooter.cpp" />
     <ClCompile Include="TPEnemy.cpp" />
     <ClCompile Include="VecItems.cpp" />
+    <ClCompile Include="VectPortales.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
