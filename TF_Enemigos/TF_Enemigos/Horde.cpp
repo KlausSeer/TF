@@ -64,6 +64,25 @@ void Horde::CheckLive()
 	}
 }
 
+void Horde::CheckLiveEnemies()
+{
+	std::vector<Enemigo*>::iterator i = Enemies.begin();
+	while (i != Enemies.end())
+	{
+		if (!(*i)->GetVivo())
+		{
+			i = Enemies.erase(i);
+		}
+		else
+			++i;
+	}
+}
+
+std::vector<Enemigo*> Horde::getHorde()
+{
+	return Enemies;
+}
+
 
 Horde::~Horde()
 {

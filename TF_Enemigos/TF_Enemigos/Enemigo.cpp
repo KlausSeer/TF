@@ -13,6 +13,8 @@ Enemigo::Enemigo(int width, int height)
 	rx = rand() % 5 + 10;
 	ry = rand() % 5 + 10;
 
+	l = 40;
+
 	dx = 0;
 	dy = 5;
 
@@ -30,8 +32,33 @@ Enemigo::~Enemigo()
 {
 }
 
+bool Enemigo::GetVivo()
+{
+	return vivo;
+}
+
+void Enemigo::setVivo(bool b)
+{
+	vivo = b;
+}
+
 int Enemigo::getTag()
 {
 	return tag;
+}
+
+int Enemigo::getX()
+{
+	return x;
+}
+
+int Enemigo::getY()
+{
+	return y;
+}
+
+int Enemigo::getL()
+{
+	return l;
 }
 

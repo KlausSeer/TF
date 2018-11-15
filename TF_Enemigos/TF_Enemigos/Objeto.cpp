@@ -22,6 +22,16 @@ Objeto::~Objeto()
 {
 }
 
+int Objeto::getX()
+{
+	return x;
+}
+
+int Objeto::getY()
+{
+	return y;
+}
+
 int Objeto::getR()
 {
 	return r;

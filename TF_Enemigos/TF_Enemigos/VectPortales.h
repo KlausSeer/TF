@@ -3,8 +3,8 @@
 #include "Portal.h"
 
 
-#define Form_Width 1200 
-#define Form_Height 670 
+#define Form_Width 2000 
+#define Form_Height 1000 
 
 class VectPortales {
 

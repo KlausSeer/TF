@@ -14,6 +14,8 @@ public:
 	Objeto(int width, int height);
 	~Objeto();
 	virtual void Mostrar(Graphics^ G, Bitmap^ bmp) = 0;
+	int getX();
+	int getY();
 	int getR();
 	short getTag();
 	bool getActivo();

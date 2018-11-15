@@ -58,3 +58,22 @@ void VecItems::Mostrar(Graphics ^ G, Bitmap ^ bmpA, Bitmap ^ bmpP, Bitmap ^ bmpV
 			var->Mostrar(G, bmpV);
 	}
 }
+
+void VecItems::CheckLive()
+{
+	std::vector<Objeto*>::iterator i = Items.begin();
+	while (i != Items.end())
+	{
+		if (!(*i)->getVivo())
+		{
+			i = Items.erase(i);
+		}
+		else
+			++i;
+	}
+}
+
+std::vector<Objeto*> VecItems::GetItems()
+{
+	return Items;
+}

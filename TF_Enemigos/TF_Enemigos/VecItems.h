@@ -13,5 +13,7 @@ public:
 	VecItems(int nA, int nP, int nV, int width, int height);
 	void Initialize(int n, int width, int height);
 	void Mostrar(Graphics^G, Bitmap^bmpA, Bitmap^bmpP, Bitmap^bmpV);
+	void CheckLive();
+	std::vector<Objeto*>GetItems();
 };
 

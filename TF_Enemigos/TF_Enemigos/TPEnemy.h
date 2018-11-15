@@ -1,4 +1,4 @@
-
+#pragma once
 #include "Melee.h"
 class TPEnemy :
 	public Melee
