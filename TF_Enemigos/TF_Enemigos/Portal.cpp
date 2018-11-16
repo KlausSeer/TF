@@ -1,8 +1,10 @@
 #include "Portal.h"
 
-Portal::Portal(int _x, int _y) {
+Portal::Portal(int _x, int _y, int Id) {
 	this->x = _x;
 	this->y = _y;
+	this->id = Id;
+	l = 5;
 	this->indice = 0;
 }
 
@@ -25,4 +27,24 @@ bool Portal::Contact_Player(Rectangle jugador_AreaDibujo) {
 	}
 
 	return false;
+}
+
+int Portal::getL()
+{
+	return l;
+}
+
+int Portal::getX()
+{
+	return x;
+}
+
+int Portal::getY()
+{
+	return y;
+}
+
+int Portal::getId()
+{
+	return id;
 }

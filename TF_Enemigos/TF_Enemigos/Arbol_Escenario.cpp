@@ -27,31 +27,36 @@
 		current->element->Mostrar(G, bg1, bmpM, bmpS, bmpB, bmpT, bmpPor, bmpA, bmpP, bmpV, bmpPlayer, bmpPro);
 	}
 
-	void Arbol_Escenario::manage_Tree(Rectangle UbicacionJugador) { //Esta funcion es llamada para ver si hay colision. Si hay colision con los portales, cambia de escenarios. Si al cambia no hay escenario, agrega Escenarios si no hay naa.
+	void Arbol_Escenario::manage_Tree(Rectangle& UbicacionJugador) { //Esta funcion es llamada para ver si hay colision. Si hay colision con los portales, cambia de escenarios. Si al cambia no hay escenario, agrega Escenarios si no hay naa.
 		
 		int prof = this->current->profundidad;
 		
 		switch (this->current->element->ver_Contact_con_Portales(UbicacionJugador))
 		{
 		case 1: //hacia arriba
-			if (this->current->Father_Esc == nullptr) {
-				// Creo que nunca se dara esta condicion
-			}else{
+			this->current->element->deActive();
+			current->element->GetPLayer()->SetTransform(Form_Width / 2, Form_Height / 2);
 				this->current = current->Father_Esc;
-			}
-				
 			break;
 		case 2: //Portal abajo izquierda
+			current->element->GetPLayer()->SetTransform(Form_Width / 2, Form_Height / 2);
 			if (this->current->left_Child_Esc == nullptr) {
-				this->current->left_Child_Esc = new Node(prof+1,new Escenario(prof+1, 4), this->current, nullptr, nullptr); //Se pasa el valor de profundidad del nodo como nivel del escenario;
+				this->current->element->deActive();
+
+				this->current->left_Child_Esc = new Node(prof+1,new Escenario(3, prof+1), this->current, nullptr, nullptr); //Se pasa el valor de profundidad del nodo como nivel del escenario;
 			}
 			this->current = current->left_Child_Esc;
+
 			break;
 		case 3: //Portal abajo derecha
+			current->element->GetPLayer()->SetTransform(Form_Width / 2, Form_Height / 2);
 			if (this->current->right_Child_Esc == nullptr) {
-				this->current->right_Child_Esc = new Node(prof+1,new Escenario(prof+1, 4), this->current, nullptr, nullptr);//Se pasa el valor de profundidad del nodo como nivel del escenario;
+				this->current->element->deActive();
+
+				this->current->right_Child_Esc = new Node(prof+1,new Escenario(3, prof+1), this->current, nullptr, nullptr);//Se pasa el valor de profundidad del nodo como nivel del escenario;
 			}
 			this->current = current->right_Child_Esc;
+
 			break;
 		default:
 			break;

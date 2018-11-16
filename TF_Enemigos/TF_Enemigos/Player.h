@@ -94,9 +94,11 @@ class Player
 	short indSpriteY;
 	int dx;
 	int dy;
+	int vidas;
 	int velocity = 5;
 	Rectangle playerImagen;
 	vector<Proyectil*>proyectiles;
+	unsigned int maxMuniciones;
 	unsigned int municiones;
 	Direction TeclaEnd; //para saber en que tecla terminó
 public:
@@ -106,7 +108,9 @@ public:
 		this->playerImagen.Y = y;
 		this->playerImagen.Width = PersonajeW;
 		this->playerImagen.Height = PersonajeH;
-		this->municiones = 10;
+		this->maxMuniciones = 10;
+		this->vidas = 3;
+		this->municiones = maxMuniciones;
 		this->TeclaEnd = Direction::Down;
 		this->direccion = Direction::Right;
 		this->indSpriteX = 1;
@@ -115,6 +119,16 @@ public:
 	~Player() {
 		for (unsigned short i = 0; i < this->proyectiles.size(); i++)
 			delete this->proyectiles[i];
+	}
+
+	void Recargar()
+	{
+		municiones = maxMuniciones;
+	}
+
+	void VidaExtra()
+	{
+		vidas++;
 	}
 
 	Rectangle getRectSubImagen(Bitmap^ img) { //Para saber en que Fragmento de la imagen esta
@@ -135,6 +149,13 @@ public:
 		img->MakeTransparent(img->GetPixel(0, 0));
 		buffer1->DrawImage(img, this->playerImagen, this->getRectSubImagen(img), GraphicsUnit::Pixel);
 	}
+
+	void SetTransform(int x, int y)
+	{
+		playerImagen.X = x;
+		playerImagen.Y = y;
+	}
+
 	void movePlayer(Graphics^ buffer1, Bitmap^ img, Keys k) //movimiento del personaje
 	{
 		
@@ -225,9 +246,10 @@ public:
 		//drawPlayer(buffer1, img);
 	}
 	void shootProyectiles() { //generación de proyectiles-cambiar
-		if (this->proyectiles.size() < this->municiones) {
+		if (municiones >= 0) {
 			Proyectil* proy = new Proyectil(this->playerImagen.X, this->playerImagen.Y, this->direccion);
 			this->proyectiles.push_back(proy);
+			municiones--;
 		}
 	}
 

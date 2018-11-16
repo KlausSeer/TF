@@ -25,7 +25,7 @@ public:
 
 	void Mostrar(Graphics^G, Bitmap^ bg1, Bitmap^bmpM, Bitmap^bmpS, Bitmap^bmpB, Bitmap^bmpT, Bitmap^ bmpPor, Bitmap^ bmpA, Bitmap^ bmpP, Bitmap^ bmpV, Bitmap^bmpPlayer, Bitmap^bmpPro);
 
-	void manage_Tree(Rectangle UbicacionJugador); // Si toca el portal cambio de escenario
+	void manage_Tree(Rectangle& UbicacionJugador); // Si toca el portal cambio de escenario
 
 	void tree_Random_node(int a, int b, int c); // parametros de teletransportación
 

@@ -7,8 +7,8 @@
 #include <vector>
 #include <ctime>
 
-#define Form_Width 2000 
-#define Form_Height 1000 
+#define Form_Width 1400
+#define Form_Height 700
 
 class Escenario
 {
@@ -30,6 +30,7 @@ public:
 	int ver_Contact_con_Portales(Rectangle UbicacionJugador); // esta funcion para saber si se ha cruzado un portal (-1: No cruzo, 1: Hacia el nodo padre, 2: nodo hijo izq, 3: nodo hijo der)
 	Player* GetPLayer();
 	void CheckColision();
+	void deActive();
 
 private:
 	

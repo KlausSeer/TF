@@ -62,3 +62,13 @@ int Enemigo::getL()
 	return l;
 }
 
+bool Enemigo::getActive()
+{
+	return activo;
+}
+
+void Enemigo::SetActive(bool b)
+{
+	activo = false;
+}
+

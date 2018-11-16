@@ -15,6 +15,12 @@ void Juego::Mover(Graphics ^ G, Bitmap ^ bmp, Keys k)
 void Juego::CheckColisions()
 {
 	tree->CheckColision();
+	tree->manage_Tree(tree->GetPLayer()->getPlayerImagen());
+}
+
+void Juego::Puntaje(int n)
+{
+	puntos += n;
 }
 
 Juego::Juego()

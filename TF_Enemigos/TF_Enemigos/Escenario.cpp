@@ -69,6 +69,23 @@ void Escenario::CheckColision()
 	{
 		Rectangle rec(var->getX(), var->getY(), var->getR(), var->getR());
 		if (player->Colision(rec))
+		{
+			switch (var->getTag())
+			{
+			case 10: player->Recargar();  break;
+			case 11:   break;
+			case 12: player->VidaExtra();  break;
+			default:
+				break;
+			}
 			var->setLive(false);
+		}
+			
 	}
+}
+
+void Escenario::deActive()
+{
+	laHorda->deActive();
+	items->deActive();
 }

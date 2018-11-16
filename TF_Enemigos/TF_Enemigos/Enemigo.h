@@ -30,5 +30,7 @@ public:
 	int getX();
 	int getY();
 	int getL();
+	bool getActive();
+	void SetActive(bool b);
 };
 

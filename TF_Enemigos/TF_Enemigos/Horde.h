@@ -8,6 +8,7 @@ class Horde
 {
 	std::vector<Enemigo*> Enemies;
 public:
+	void deActive();
 	Horde(int n, int width, int height);
 	Horde(int nM, int nS, int width, int height);
 	void Initialize(int n, int width, int height);

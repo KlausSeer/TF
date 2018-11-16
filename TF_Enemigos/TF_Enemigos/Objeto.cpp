@@ -13,7 +13,7 @@ Objeto::Objeto(int width, int height)
 
 	r = 40;
 
-	activo = false;
+	activo = true;
 	vivo = true;
 }
 

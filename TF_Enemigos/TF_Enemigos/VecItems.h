@@ -15,5 +15,6 @@ public:
 	void Mostrar(Graphics^G, Bitmap^bmpA, Bitmap^bmpP, Bitmap^bmpV);
 	void CheckLive();
 	std::vector<Objeto*>GetItems();
+	void deActive();
 };
 

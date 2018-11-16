@@ -50,13 +50,17 @@ void VecItems::Mostrar(Graphics ^ G, Bitmap ^ bmpA, Bitmap ^ bmpP, Bitmap ^ bmpV
 {
 	for each (Objeto* var in Items)
 	{
-		if (var->getTag() == 10)
-			var->Mostrar(G, bmpA);
-		else if (var->getTag() == 11)
-			var->Mostrar(G, bmpP);
-		else if (var->getTag() == 12)
-			var->Mostrar(G, bmpV);
-	}
+		if (var->getActivo())
+		{
+
+			if (var->getTag() == 10)
+				var->Mostrar(G, bmpA);
+			else if (var->getTag() == 11)
+				var->Mostrar(G, bmpP);
+			else if (var->getTag() == 12)
+				var->Mostrar(G, bmpV);
+		}
+		}
 }
 
 void VecItems::CheckLive()
@@ -76,4 +80,12 @@ void VecItems::CheckLive()
 std::vector<Objeto*> VecItems::GetItems()
 {
 	return Items;
+}
+
+void VecItems::deActive()
+{
+	for each (Objeto* var in Items)
+	{
+		var->setActive(false);
+	}
 }

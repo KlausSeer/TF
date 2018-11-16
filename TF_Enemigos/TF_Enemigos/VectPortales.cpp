@@ -8,11 +8,11 @@
 	void VectPortales::inicializarPortales(int n) {
 
 		if (n == 3) {
-			this->portales.push_back(new Portal((Form_Width / 2) - 7, 0)); //Portal superior central (para regresar al escenario anterior); 
+			this->portales.push_back(new Portal((Form_Width / 2) - 7, 0,1)); //Portal superior central (para regresar al escenario anterior); 
 		}
 
-		this->portales.push_back(new Portal((Form_Width / 10), (Form_Height - 25))); // Portal inferior izq
-		this->portales.push_back(new Portal((Form_Width / 1.2), (Form_Height - 25))); // Portal inferior der
+		this->portales.push_back(new Portal((Form_Width / 10), (Form_Height - 25), 2)); // Portal inferior izq
+		this->portales.push_back(new Portal((Form_Width / 1.2), (Form_Height - 25), 3)); // Portal inferior der
 
 	}
 
@@ -23,15 +23,17 @@
 	}
 
 	int VectPortales::ver_Contact_con_Portales(Rectangle UbicacionJugador) {
-
-		int i = 0;
 		for each(Portal* var in portales) {
-			i += 1;
 			if (var->Contact_Player(UbicacionJugador)) {
-				return i;
+				return var->getId();
 			}
 
 		}
 
 		return -1;
+	}
+
+	std::vector<Portal*> VectPortales::getPortales()
+	{
+		return portales;
 	}

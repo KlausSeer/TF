@@ -1,5 +1,16 @@
 #include "Horde.h"
 
+void Horde::deActive()
+{
+	for each (Enemigo* var in Enemies)
+	{
+		for each (Enemigo* var in Enemies)
+		{
+			var->SetActive(false);
+		}
+	}
+}
+
 Horde::Horde(int n, int width, int height)
 {
 	Initialize(n, width, height);
@@ -44,15 +55,18 @@ void Horde::Mostrar(Graphics ^ G, Bitmap^bmpM, Bitmap^bmpS, Bitmap^bmpB, Bitmap^
 {
 	for each (Enemigo* var in Enemies)
 	{
-		if (var->getTag() == 0)
-			var->Mostrar(G, bmpM);
+		if (var->getActive())
+		{
+			if (var->getTag() == 0)
+				var->Mostrar(G, bmpM);
 
-		else if(var->getTag() == 1)
-			var->Mostrar(G, bmpS, bmpB);
+			else if (var->getTag() == 1)
+				var->Mostrar(G, bmpS, bmpB);
 
-		else if (var->getTag() == 2)
-			var->Mostrar(G, bmpT);
-	}
+			else if (var->getTag() == 2)
+				var->Mostrar(G, bmpT);
+			}
+		}
 }
 
 void Horde::CheckLive()
