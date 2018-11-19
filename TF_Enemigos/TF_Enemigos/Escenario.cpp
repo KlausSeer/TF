@@ -79,6 +79,7 @@ void Escenario::CheckColision()
 				break;
 			}
 			var->setLive(false);
+			return;
 		}
 			
 	}

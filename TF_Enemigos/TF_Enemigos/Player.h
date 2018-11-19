@@ -40,7 +40,7 @@ public:
 		return	Rectangle(this->indProyX * ancho, this->indProyY*alto, ancho, alto);
 	}
 	void drawProyectil(Graphics^ buffer1, Bitmap^ img) {
-		img->MakeTransparent(img->GetPixel(0, 0));
+		//img->MakeTransparent(img->GetPixel(0, 0));
 		buffer1->DrawImage(img, this->proyectilImagen, this->getRectSubImgProy(img), GraphicsUnit::Pixel);
 		proyectilImagen.X += dpx;
 		proyectilImagen.Y += dpy;
@@ -99,7 +99,7 @@ class Player
 	Rectangle playerImagen;
 	vector<Proyectil*>proyectiles;
 	unsigned int maxMuniciones;
-	unsigned int municiones;
+	int municiones;
 	Direction TeclaEnd; //para saber en que tecla terminó
 public:
 	Direction direccion;
@@ -156,7 +156,7 @@ public:
 		playerImagen.Y = y;
 	}
 
-	void movePlayer(Graphics^ buffer1, Bitmap^ img, Keys k) //movimiento del personaje
+	void movePlayer(Keys k) //movimiento del personaje
 	{
 		
 		switch (k)
@@ -246,11 +246,12 @@ public:
 		//drawPlayer(buffer1, img);
 	}
 	void shootProyectiles() { //generación de proyectiles-cambiar
-		if (municiones >= 0) {
+		if (municiones > 0) {
 			Proyectil* proy = new Proyectil(this->playerImagen.X, this->playerImagen.Y, this->direccion);
 			this->proyectiles.push_back(proy);
 			municiones--;
 		}
+		
 	}
 
 

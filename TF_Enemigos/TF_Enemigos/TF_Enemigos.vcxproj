@@ -146,6 +146,8 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Portal.h" />
     <ClInclude Include="Shooter.h" />
+    <ClInclude Include="Task.h" />
+    <ClInclude Include="TaskList.h" />
     <ClInclude Include="TPEnemy.h" />
     <ClInclude Include="VecItems.h" />
     <ClInclude Include="VectPortales.h" />
@@ -166,6 +168,8 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Shooter.cpp" />
+    <ClCompile Include="Task.cpp" />
+    <ClCompile Include="TaskList.cpp" />
     <ClCompile Include="TPEnemy.cpp" />
     <ClCompile Include="VecItems.cpp" />
     <ClCompile Include="VectPortales.cpp" />

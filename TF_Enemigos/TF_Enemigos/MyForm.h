@@ -70,6 +70,7 @@ namespace TF_Enemigos {
 		Bitmap^ PlayerBitmap;
 		Bitmap^ ProyectilBitmap;
 		Juego* GameManager;
+		bool Delay = false;
 	private: System::Windows::Forms::Timer^  deltaTime;
 	private: System::Windows::Forms::Timer^  PhysicsTime;
 			 BufferedGraphicsContext^ espaceBuffer;
@@ -111,13 +112,22 @@ namespace TF_Enemigos {
 #pragma endregion
 	private: System::Void deltaTime_Tick(System::Object^  sender, System::EventArgs^  e) {
 		//horde->CheckLive();
+		GameManager->doTasks();
 		BG->Graphics->Clear(Color::Black);
 		//BG->Graphics->DrawImage(background, 0.0f, 0.0f, G->VisibleClipBounds.Width, G->VisibleClipBounds.Height);
 		GameManager->Mostrar(BG->Graphics, background, MeleBitmap, ShootBitmap, BulletBitmap, TPBitmap, TPBitmap, AmmoBitmap, PointsBitmap, LifeBitmap, PlayerBitmap, ProyectilBitmap);
 		BG->Render(G);
 	}
 	private: System::Void MyForm_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e) {
-		GameManager->Mover(BG->Graphics, PlayerBitmap, e->KeyCode);
+		if (e->KeyCode == Keys::D)
+		{
+			Delay = !Delay;
+			return;
+		}
+		if (!Delay)
+			GameManager->Mover(e->KeyCode);
+		else
+			GameManager->MoverT(e->KeyCode);
 	}
 	private: System::Void PhysicsTime_Tick(System::Object^  sender, System::EventArgs^  e) {
 		GameManager->CheckColisions();
