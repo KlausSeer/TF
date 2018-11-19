@@ -73,7 +73,7 @@
 
 		srand(time(NULL));
 
-		int n = _a + _b + _c;
+		int n = 300;
 
 		for (int i = 0; i < n; i++) {
 
