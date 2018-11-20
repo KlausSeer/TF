@@ -136,7 +136,7 @@
 		{
 		case 0: Damage(); break;
 		case 1: Damage(); break;
-		case 2: tree_Random_node(1, 1, 1); break;
+		case 2: tree_Random_node(current->element->GetPLayer()->getVidas()* rand()%10, current->element->GetPLayer()->getMunicion()* rand() % 10, puntos* rand()%10); break;
 
 		case 10: current->element->GetPLayer()->Recargar();  break;
 		case 11: Puntaje(10);  break;

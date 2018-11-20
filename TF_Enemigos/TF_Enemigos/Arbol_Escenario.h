@@ -83,11 +83,11 @@ public:
 
 
 		writer->WriteStartElement("NShooter"); //<---------------------
-		writer->WriteString(node->element->n_Shooter().ToString());// <<<<-- Implementar una funcion que retorne el numero de Enemigos Shooters
+		writer->WriteString(node->element->getHorda()->GetShooter().ToString());// <<<<-- Implementar una funcion que retorne el numero de Enemigos Shooters
 		writer->WriteEndElement();
 
 		writer->WriteStartElement("NMele");
-		writer->WriteString(node->element->n_Mele().ToString()); //<<<--Implementar una funcion que retorne el numero de Enemigos Melee
+		writer->WriteString(node->element->getHorda()->GetMele().ToString()); //<<<--Implementar una funcion que retorne el numero de Enemigos Melee
 		writer->WriteEndElement();
 		
 

@@ -97,6 +97,29 @@ std::vector<Enemigo*> Horde::getHorde()
 	return Enemies;
 }
 
+int Horde::GetMele()
+{
+	int n = 0;
+	for each (Enemigo* var in Enemies)
+	{
+		if (var->getTag() == 0)
+			n++;
+	}
+
+	return n;
+}
+
+int Horde::GetShooter()
+{
+	int n = 0;
+	for each (Enemigo* var in Enemies)
+	{
+		if (var->getTag() == 1)
+			n++;
+	}
+	return n;
+}
+
 
 Horde::~Horde()
 {

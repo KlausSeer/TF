@@ -159,6 +159,11 @@ public:
 		return vidas;
 	}
 
+	int getMunicion()
+	{
+		return municiones;
+	}
+
 	void Damage()
 	{
 		vidas--;

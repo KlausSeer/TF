@@ -17,6 +17,10 @@ public:
 	void Lose(Graphics^G, Bitmap^bmp);
 	bool getPlay();
 	void CheckProyectiles();
+	Arbol_Escenario* retorna_Tree()
+	{
+		return this->tree;
+	}
 	Juego();
 	~Juego();
 };

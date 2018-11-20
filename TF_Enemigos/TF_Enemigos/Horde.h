@@ -16,6 +16,8 @@ public:
 	void CheckLive();
 	void CheckLiveEnemies();
 	std::vector<Enemigo*>getHorde();
+	int GetMele();
+	int GetShooter();
 	~Horde();
 };
 

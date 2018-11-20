@@ -32,7 +32,24 @@ public:
 	int CheckColision();
 	void CheckProyectiles();
 	void deActive();
-
+	int n_Shooter()
+	{
+		int n = 8;
+		return n;
+	}
+	int n_Mele()
+	{
+		int n = 8;
+		return n;
+	}
+	int n_Profundidad()
+	{
+		return this->nivel;
+	}
+	Horde* getHorda()
+	{
+		return laHorda;
+	}
 private:
 	
 };
