@@ -3,7 +3,8 @@
 #include<ctime>
 
 
-	Arbol_Escenario::Node::Node(int profundidad, Escenario* element, Node* padre, Node* left, Node* right) {
+	Arbol_Escenario::Node::Node(int profundidad, Escenario* element, Node* padre, Node* left, Node* right,int id) {//
+		this->id = id;
 		this->profundidad = profundidad;
 		this->element = element;
 		Father_Esc = padre; // Apunta a su padre tambien
@@ -14,8 +15,9 @@
 
 
 	Arbol_Escenario::Arbol_Escenario() {
-		root = new Node(1,new Escenario(2, 1), nullptr, nullptr, nullptr); // Prof o Nivel del nodo raiz es 1
+		root = new Node(1,new Escenario(2, 1), nullptr, nullptr, nullptr, 0); // Prof o Nivel del nodo raiz es 1
 		current = root;
+		auxCurrent = root;
 	}
 
 	Arbol_Escenario::Node* Arbol_Escenario::return_Current_Tree() { // Para saber en donde estamos
@@ -43,17 +45,17 @@
 			if (this->current->left_Child_Esc == nullptr) {
 				this->current->element->deActive();
 
-				this->current->left_Child_Esc = new Node(prof+1,new Escenario(3, prof+1), this->current, nullptr, nullptr); //Se pasa el valor de profundidad del nodo como nivel del escenario;
+				this->current->left_Child_Esc = new Node(prof+1,new Escenario(3, prof+1), this->current, nullptr, nullptr, 1); //Se pasa el valor de profundidad del nodo como nivel del escenario;
 			}
 			this->current = current->left_Child_Esc;
 
 			break;
 		case 3: //Portal abajo derecha
-			current->element->GetPLayer()->SetTransform(Form_Width / 2, Form_Height / 2);
+			current->element->GetPLayer()->SetTransform(Form_Width / 2, Form_Height / 3);
 			if (this->current->right_Child_Esc == nullptr) {
 				this->current->element->deActive();
 
-				this->current->right_Child_Esc = new Node(prof+1,new Escenario(3, prof+1), this->current, nullptr, nullptr);//Se pasa el valor de profundidad del nodo como nivel del escenario;
+				this->current->right_Child_Esc = new Node(prof+1,new Escenario(3, prof+1), this->current, nullptr, nullptr,2);//Se pasa el valor de profundidad del nodo como nivel del escenario;
 			}
 			this->current = current->right_Child_Esc;
 
@@ -91,14 +93,14 @@
 				}
 
 				break;
-			case 2: // Hacia el hijo der
+			case 2: // Hacia el hijo izq
 				if (_b > 0) {
 					if (this->current->left_Child_Esc != nullptr) { //Si es que hay hijo, nos movemos al hijo
 						this->current = this->current->left_Child_Esc;
 					}
 					else { // Si no hay hijo, lo creamos y nos movemos ahi
 						int prof = this->current->profundidad;
-						this->current->left_Child_Esc = new Node(prof + 1, new Escenario(3, prof + 1), this->current, nullptr, nullptr);
+						this->current->left_Child_Esc = new Node(prof + 1, new Escenario(3, prof + 1), this->current, nullptr, nullptr,1);
 						this->current = this->current->left_Child_Esc;
 					}
 					_b -= 1;
@@ -113,7 +115,7 @@
 					}
 					else { // Si no hay hijo, lo creamos y nos movemos ahi
 						int prof = this->current->profundidad;
-						this->current->right_Child_Esc = new Node(prof + 1, new Escenario(3, prof + 1), this->current, nullptr, nullptr);
+						this->current->right_Child_Esc = new Node(prof + 1, new Escenario(3, prof + 1), this->current, nullptr, nullptr,2);
 						this->current = this->current->right_Child_Esc;
 					}
 					_c -= 1;
