@@ -10,6 +10,8 @@ namespace TF_Enemigos {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::IO;
+	using namespace System::Xml;
 
 	/// <summary>
 	/// Resumen de MyForm
@@ -21,7 +23,7 @@ namespace TF_Enemigos {
 		{
 			InitializeComponent();
 			//
-			//TODO: agregar código de constructor aquí
+			//TODO: agregar cÃ³digo de constructor aquÃ­
 			//
 			G = this->CreateGraphics();
 			espaceBuffer = BufferedGraphicsManager::Current;
@@ -42,7 +44,7 @@ namespace TF_Enemigos {
 
 	protected:
 		/// <summary>
-		/// Limpiar los recursos que se estén usando.
+		/// Limpiar los recursos que se estÃ©n usando.
 		/// </summary>
 		~MyForm()
 		{
@@ -56,7 +58,7 @@ namespace TF_Enemigos {
 
 	private:
 		/// <summary>
-		/// Variable del diseñador necesaria.
+		/// Variable del diseÃ±ador necesaria.
 		/// </summary>
 		Graphics^ G;
 		BufferedGraphics^ BG;
@@ -80,8 +82,8 @@ namespace TF_Enemigos {
 
 #pragma region Windows Form Designer generated code
 			 /// <summary>
-			 /// Método necesario para admitir el Diseñador. No se puede modificar
-			 /// el contenido de este método con el editor de código.
+			 /// MÃ©todo necesario para admitir el DiseÃ±ador. No se puede modificar
+			 /// el contenido de este mÃ©todo con el editor de cÃ³digo.
 			 /// </summary>
 			 void InitializeComponent(void)
 			 {
@@ -129,6 +131,12 @@ namespace TF_Enemigos {
 			Delay = !Delay;
 			return;
 		}
+		
+		if (e->KeyCode == Keys::Y){ // TECLA PARA GUARDAR ------------------------------------>
+			this->GameManager->retorna_Tree()->save_tree();
+			return;
+		}
+		
 		if (!Delay)
 			GameManager->Mover(e->KeyCode);
 		else
