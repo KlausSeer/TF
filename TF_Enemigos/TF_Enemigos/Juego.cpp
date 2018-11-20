@@ -21,18 +21,35 @@ void Juego::Mover(Keys k)
 void Juego::CheckColisions()
 {
 	tree->CheckColision();
+	tree->CheckProyectiles();
 	tree->manage_Tree(tree->GetPLayer()->getPlayerImagen());
-}
-
-void Juego::Puntaje(int n)
-{
-	puntos += n;
 }
 
 void Juego::doTasks()
 {
 	tasks->CheckLive();
 	tasks->doTasks(0.2f);
+}
+
+void Juego::Lose(Graphics^G, Bitmap^bmp)
+{
+	if (!tree->getVivo())
+	{
+		//Funcion Destruir 
+		G->Clear(Color::Black);
+		G->DrawImage(bmp, Rectangle(0, 0, Form_Width, Form_Height));
+		Play = false;
+	}
+}
+
+bool Juego::getPlay()
+{
+	return Play;
+}
+
+void Juego::CheckProyectiles()
+{
+	tree->GetPLayer()->CheckPVivos();
 }
 
 Juego::Juego()

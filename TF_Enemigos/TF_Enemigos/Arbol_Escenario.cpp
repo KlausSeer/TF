@@ -130,12 +130,46 @@
 
 	void Arbol_Escenario::CheckColision()
 	{
-		current->element->CheckColision();
+		switch (current->element->CheckColision())
+		{
+		case 0: Damage(); break;
+		case 1: Damage(); break;
+		case 2: tree_Random_node(1, 1, 1); break;
+
+		case 10: current->element->GetPLayer()->Recargar();  break;
+		case 11: Puntaje(10);  break;
+		case 12: current->element->GetPLayer()->VidaExtra();  break;
+		default:
+			break;
+		}
+		
 	}
 
 	Player * Arbol_Escenario::GetPLayer()
 	{
 		return current->element->GetPLayer();
+	}
+
+	void Arbol_Escenario::Puntaje(int n)
+	{
+		puntos += n;
+	}
+
+	bool Arbol_Escenario::getVivo()
+	{
+		return current->element->GetPLayer()->getVivo();
+	}
+
+	void Arbol_Escenario::Damage()
+	{
+		current->element->GetPLayer()->Damage();
+		if (current->element->GetPLayer()->getVidas() == 0)
+			current->element->GetPLayer()->Kill();
+	}
+
+	void Arbol_Escenario::CheckProyectiles()
+	{
+		current->element->CheckProyectiles();
 	}
 
 

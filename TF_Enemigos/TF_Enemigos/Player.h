@@ -21,6 +21,7 @@ class Proyectil
 	int dpy;
 	short indProyX;
 	short indProyY;
+	bool enabled = true;
 	Direction dir;
 	Rectangle proyectilImagen;
 public:
@@ -83,6 +84,17 @@ public:
 		}
 		drawProyectil(buffer1, img);
 	}
+
+	bool getEnabled()
+	{
+		return enabled;
+	}
+
+	void setEnabled(bool b)
+	{
+		enabled = b;
+	}
+
 	//Falta tiempo de recarga
 
 };
@@ -96,6 +108,7 @@ class Player
 	int dy;
 	int vidas;
 	int velocity = 5;
+	bool Vivo;
 	Rectangle playerImagen;
 	vector<Proyectil*>proyectiles;
 	unsigned int maxMuniciones;
@@ -104,6 +117,7 @@ class Player
 public:
 	Direction direccion;
 	Player(int x, int y) {
+		this->Vivo = true;
 		this->playerImagen.X = x;
 		this->playerImagen.Y = y;
 		this->playerImagen.Width = PersonajeW;
@@ -119,6 +133,40 @@ public:
 	~Player() {
 		for (unsigned short i = 0; i < this->proyectiles.size(); i++)
 			delete this->proyectiles[i];
+	}
+
+	void CheckPVivos()
+	{
+		std::vector<Proyectil*>::iterator i = proyectiles.begin();
+		while (i != proyectiles.end())
+		{
+			if ((*i)->getEnabled() == false)
+			{
+				delete (*i);
+				i = proyectiles.erase(i);
+			}
+			else ++i;
+		}
+	}
+
+	bool getVivo()
+	{
+		return Vivo;
+	}
+
+	int getVidas()
+	{
+		return vidas;
+	}
+
+	void Damage()
+	{
+		vidas--;
+	}
+
+	void Kill()
+	{
+		Vivo = false;
 	}
 
 	void Recargar()
@@ -276,6 +324,7 @@ public:
 
 		}
 	}
+
 	void eliminateProyectil(int i) {
 		delete this->proyectiles.at(i);
 		this->proyectiles.erase(this->proyectiles.begin() + i);

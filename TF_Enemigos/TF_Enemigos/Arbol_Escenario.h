@@ -10,12 +10,13 @@ class Arbol_Escenario {
 		Node* left_Child_Esc;
 		Node* right_Child_Esc;
 		int profundidad;
+		
 		Node(int profundidad, Escenario* element, Node* padre, Node* left, Node* right);
 	};
 
 	Node* root;
 	Node* current;
-
+	int puntos;
 
 public:
 
@@ -30,6 +31,14 @@ public:
 	void tree_Random_node(int a, int b, int c); // parametros de teletransportación
 
 	void CheckColision();
+
+	void Puntaje(int n);
+
+	bool getVivo();
+
+	void Damage();
+
+	void CheckProyectiles();
 
 	Player* GetPLayer();
 };

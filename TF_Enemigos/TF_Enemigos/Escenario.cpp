@@ -56,13 +56,18 @@ Player * Escenario::GetPLayer()
 	return player;
 }
 
-void Escenario::CheckColision()
+int Escenario::CheckColision()
 {
 	for each (Enemigo* var in laHorda->getHorde())
 	{
 		Rectangle rec(var->getX(), var->getY(), var->getL(), var->getL());
 		if (player->Colision(rec))
+		{
 			var->setVivo(false);
+			return var->getTag();
+
+		}
+	
 	}
 
 	for each (Objeto* var in items->GetItems())
@@ -70,18 +75,30 @@ void Escenario::CheckColision()
 		Rectangle rec(var->getX(), var->getY(), var->getR(), var->getR());
 		if (player->Colision(rec))
 		{
-			switch (var->getTag())
-			{
-			case 10: player->Recargar();  break;
-			case 11:   break;
-			case 12: player->VidaExtra();  break;
-			default:
-				break;
-			}
 			var->setLive(false);
-			return;
+			return var->getTag();
 		}
-			
+		return -1;
+	}
+}
+
+void Escenario::CheckProyectiles()
+{
+	for each (Proyectil* pro in player->getProyectiles())
+	{
+		for each (Enemigo* var in laHorda->getHorde())
+		{
+
+			if (var->getTag() != 2)
+			{
+				Rectangle rec(var->getX(), var->getY(), var->getL(), var->getL());
+				if (pro->Colision(rec))
+				{
+					var->setVivo(false);
+					pro->setEnabled(false);
+				}
+			}
+		}
 	}
 }
 
